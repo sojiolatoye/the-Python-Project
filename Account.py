@@ -7,22 +7,22 @@ class Account:
         self.currentBalance = currentBalance
 
     def getAccountNumber(self):
-        pass
+        self.accountnumber
 
     def getAccountHolderName(self):
-        pass
+        self.accountHolderName
 
     def getRateOfInterest(self):
-        pass
+        self.rateOfInterest
 
     def getCurrentBalance(self):
-        pass
+        self.currentBalance = self.currentBalance * self.rateOfInterest + self.currentBalance
 
     def setAccountHolderName(self):
-        pass
+        self.accountHolderName 
 
     def setRateOfInterest(self):
-        pass
+        self.rateOfInterest
 
     def deposit(self):
         pass
