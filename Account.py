@@ -1,13 +1,13 @@
 class Account:
 
     def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance):
-        self.accountnumber = accountNumber
+        self.accountNumber = accountNumber
         self.accountHolderName = accountHolderName
         self.rateOfInterest = rateOfInterest
         self.currentBalance = currentBalance
 
     def getAccountNumber(self):
-        self.accountnumber
+        self.accountNumber
 
     def getAccountHolderName(self):
         self.accountHolderName
@@ -24,8 +24,10 @@ class Account:
     def setRateOfInterest(self):
         self.rateOfInterest
 
-    def deposit(self):
-        pass
+    def deposit(self, depo):
+        self.depo = depo
+        self.depo = self.currentBalance + self.depo
 
-    def withdraw(self):
-        pass 
+    def withdraw(self, withdrawal):
+        self.withdrawal = withdrawal
+        self.withdrawal = self.currentBalance - self.withdrawal

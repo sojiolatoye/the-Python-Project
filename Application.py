@@ -1,63 +1,66 @@
 from Account import Account
 from Bank import Bank
 
+class Application:
+    def __init__(self, bank):
+        self.bank = bank
 
-def showMainMenu():
-    bank = Bank()
-    while True:
-        a1 = input("Welcome to the banking menu. Choose one of the following : Select Account, Open Account, Exit")
-        if a1 == "Select Account":
-            a2 = int(input("enter the account number of the account you want to work with"))
-            if a2 == bank.searchAccount():
-                showAccountMenu()
-            else:
-                print("Input valid account number")
-        elif a1 == "Open Account":
-            a3 = int(input("input account number"))
-            a4 = input("input account holder name")
-            a5 = float(input("input rate of interest"))
-            a6 = float(input("input current balance"))
-            a = Account(a3, a4, a5, a6)
-            print(a)
-        elif a1 == "Exit":
-            break
+    def show_main_menu(self):
+        print("Welcome to the Bank Application")
+        print("1. Open a New Account")
+        print("2. Show Existing Accounts")
+        print("3. Exit")
+        return input("Choose an option: ")
+
+    def open_account(self):
+        account_type = input("Enter account type (savings/chequing): ")
+        account_holder_name = input("Enter account holder name: ")
+        rate_of_interest = float(input("Enter the rate of interest: "))
+        current_balance = float(input("Enter the current balance: "))
+
+        new_account_number = self.bank.generate_account_number(account_type)
+
+        # Additional parameters for specific account types
+        if account_type == "savings":
+            minimum_balance = float(input("Enter the minimum balance: "))
+            account = self.bank.create_account(account_type,new_account_number, account_holder_name, rate_of_interest, current_balance, minimumBalance=minimum_balance)
+        elif account_type == "chequing":
+            overdraft_limit = float(input("Enter the overdraft limit: "))
+            account = self.bank.create_account(account_type, new_account_number, account_holder_name, rate_of_interest, current_balance, overdraftLimit=overdraft_limit)
         else:
-              print("Input valid option")
-    
+            print("Invalid account type.")
+            return
 
-def showAccountMenu():
-        bank = Bank()
+        print(f"Account created successfully. Account Number: {account.accountNumber}")
+
+    def show_account(self):
+        account_number = input("Enter the account number: ")
+        account = self.bank.get_account(account_number)
+
+        if account is None:
+            print("Account not found.")
+        else:
+            print(f"Account Number: {account.accountNumber}, Account Holder: {account.accountHolderName}, Balance: {account.currentBalance}")
+
+
+
+    def run(self):
         while True:
-            a7 = input("Welcome to the Account menu. Choose one of the following : Check Balance, Deposit, Withdraw, Exit")
-            if a7 == "Check Balance":
-                print(bank)
-            elif a7 == "Deposit":
-                a8 = float(input("Input deposit amount"))
-                print(a8)
-            elif a7 == "withdraw":
-                a9 = float(input("Input withdrawal amount"))
-                print(a9)
-            elif a7 == "Exit":
+            choice = self.show_main_menu()
+            if choice == '1':
+                self.open_account()
+            elif choice == '2':
+                self.show_account()
+            elif choice == '3':
+                print("Exiting the application.")
                 break
             else:
-                print("Input valid option")
+                print("Invalid option, please try again.")
 
-def run():
-    showMainMenu()    
-
-run()
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    bank = Bank()
+    app = Application(bank)
+    app.run()
 
 
     
-
-
-
-
-
