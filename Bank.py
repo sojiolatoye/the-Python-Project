@@ -1,7 +1,7 @@
 from SavingsAccount import SavingsAccount
 from ChequingAccount import ChequingAccount
 class Bank:
-    def __init__(self):
+    def __init__(self):   #list of harcoded accounts 
         self.accounts = {}
         self.last_account_number = 3
 
@@ -13,7 +13,7 @@ class Bank:
         self.accounts["C002"] = ChequingAccount("C002", "Eve", 0.01, 750, 200)
         self.accounts["C003"] = ChequingAccount("C003", "Frank", 0.01, 1000, 300)
 
-    def generate_account_number(self, account_type):
+    def generate_account_number(self, account_type):  #generate account number method
         """
         Generates a unique sequential account number with a prefix based on account type.
         """
@@ -21,7 +21,7 @@ class Bank:
         account_prefix = "S" if account_type.lower() == "savings" else "C"
         return f"{account_prefix}{str(self.last_account_number).zfill(3)}" 
 
-    def create_account(self, account_type, account_number, account_holder_name, rate_of_interest, current_balance, **kwargs):
+    def create_account(self, account_type, account_number, account_holder_name, rate_of_interest, current_balance, **kwargs):  #create account method
         if account_number in self.accounts:
             raise ValueError("Account number already exists.")
 
@@ -34,6 +34,6 @@ class Bank:
 
         return self.accounts[account_number]
 
-    def get_account(self, account_number):
+    def get_account(self, account_number):  #Get account method
         # Retrieve an account by its account number
         return self.accounts.get(account_number, None)
