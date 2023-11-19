@@ -24,10 +24,16 @@ class Account:
     def setRateOfInterest(self):
         self.rateOfInterest
 
-    def deposit(self, depo):
-        self.depo = depo
-        self.depo = self.currentBalance + self.depo
+    def deposit(self, amount):
+        if amount > 0:
+            self.currentBalance += amount
+            return True
+        else:
+            return False
 
-    def withdraw(self, withdrawal):
-        self.withdrawal = withdrawal
-        self.withdrawal = self.currentBalance - self.withdrawal
+    def withdraw(self, amount):
+        if 0 < amount <= self.currentBalance:
+            self.currentBalance -= amount
+            return True
+        else:
+            return False

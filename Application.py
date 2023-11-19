@@ -33,15 +33,59 @@ class Application:
 
         print(f"Account created successfully. Account Number: {account.accountNumber}")
 
-    def show_account(self):
+    # def show_account(self):
+    #     account_number = input("Enter the account number: ")
+    #     account = self.bank.get_account(account_number)
+
+    #     if account is None:
+    #         print("Account not found.")
+    #     else:
+    #         print(f"Account Number: {account.accountNumber}, Account Holder: {account.accountHolderName}, Balance: {account.currentBalance}")
+
+
+    def select_account(self):
         account_number = input("Enter the account number: ")
         account = self.bank.get_account(account_number)
 
         if account is None:
             print("Account not found.")
         else:
-            print(f"Account Number: {account.accountNumber}, Account Holder: {account.accountHolderName}, Balance: {account.currentBalance}")
+            self.show_account_menu(account)
 
+    def show_account_menu(self, account):
+        while True:
+            print("\nAccount Menu:")
+            print("1. Check Balance")
+            print("2. Deposit")
+            print("3. Withdraw")
+            print("4. Exit Account")
+
+            choice = input("Choose an option: ")
+
+            if choice == '1':
+                print(f"Current Balance: {account.currentBalance}")
+            elif choice == '2':
+                self.deposit_money(account)
+            elif choice == '3':
+                self.withdraw_money(account)
+            elif choice == '4':
+                break
+            else:
+                print("Invalid option, please try again.")
+
+    def deposit_money(self, account):
+        amount = float(input("Enter the amount to deposit: "))
+        if account.deposit(amount):
+            print(f"Amount deposited successfully. New Balance: {account.currentBalance}")
+        else:
+            print("Deposit failed. Please check the amount.")
+
+    def withdraw_money(self, account):
+        amount = float(input("Enter the amount to withdraw: "))
+        if account.withdraw(amount):
+            print(f"Amount withdrawn successfully. New Balance: {account.currentBalance}")
+        else:
+            print("Withdrawal failed. Please check the amount.")
 
 
     def run(self):
@@ -50,7 +94,7 @@ class Application:
             if choice == '1':
                 self.open_account()
             elif choice == '2':
-                self.show_account()
+                self.select_account()
             elif choice == '3':
                 print("Exiting the application.")
                 break
@@ -63,4 +107,10 @@ if __name__ == "__main__":
     app.run()
 
 
+
     
+
+
+
+
+

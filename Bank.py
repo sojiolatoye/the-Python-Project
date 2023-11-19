@@ -37,6 +37,3 @@ class Bank:
     def get_account(self, account_number):
         # Retrieve an account by its account number
         return self.accounts.get(account_number, None)
-
-
- 
